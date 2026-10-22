@@ -23,7 +23,6 @@ A full-stack portfolio rebuild based on the uploaded MyFolio HTML template. The 
    ```bash
    npm install
    ```
-
 2. Create your environment file:
 
    ```bash
@@ -31,29 +30,28 @@ A full-stack portfolio rebuild based on the uploaded MyFolio HTML template. The 
    ```
 
    On Windows PowerShell use `Copy-Item .env.example .env`. Set `DATABASE_URL` to your PostgreSQL connection string. Set `SESSION_SECRET` to a cryptographically random secret of at least 32 characters. For example, generate one with `node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"`.
-
 3. Generate Prisma Client and apply the first migration:
 
    ```bash
    npx prisma generate
    npx prisma migrate dev --name init
    ```
-
 4. Create the first administrator. Do not commit credentials or put them in client-side environment variables:
 
    **PowerShell**
+
    ```powershell
    $env:ADMIN_EMAIL="you@example.com"
    $env:ADMIN_NAME="Site Admin"
    $env:ADMIN_PASSWORD="use-a-unique-password-of-at-least-12-characters"
-   npm run admin:create
+   npm run create-admin
    ```
 
    **macOS/Linux**
-   ```bash
-   ADMIN_EMAIL="you@example.com" ADMIN_NAME="Site Admin" ADMIN_PASSWORD="use-a-unique-password-of-at-least-12-characters" npm run admin:create
-   ```
 
+   ```bash
+   ADMIN_EMAIL="you@example.com" ADMIN_NAME="Site Admin" ADMIN_PASSWORD="use-a-unique-password-of-at-least-12-characters" npm run create-admin
+   ```
 5. Run the app:
 
    ```bash
@@ -127,4 +125,5 @@ src/
 prisma/schema.prisma
 scripts/create-admin.ts
 ```
+
 # Portfolio

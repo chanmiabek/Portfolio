@@ -1,0 +1,4 @@
+ "use server";
+import {revalidatePath} from "next/cache";import {redirect} from "next/navigation";import {requireAdmin} from "@/lib/auth";import {db} from "@/lib/db";
+export async function createService(form:FormData){await requireAdmin();const title=String(form.get("title")||"").trim(),description=String(form.get("description")||"").trim();if(title.length<2||description.length<5)redirect("/admin/services?error=1");await db.service.create({data:{title,description,icon:String(form.get("icon")||"code"),sortOrder:Number(form.get("sortOrder")||0)}});revalidatePath("/");redirect("/admin/services?saved=1");}
+export async function deleteService(form:FormData){await requireAdmin();const id=String(form.get("id")||"");if(id)await db.service.delete({where:{id}});revalidatePath("/");redirect("/admin/services");}
